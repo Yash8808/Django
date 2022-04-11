@@ -27,6 +27,5 @@ stages:
         regionName: 'us-east-1'
         secretIdOrName: 'test'
         variableName: 'xyz'
-    - task: CmdLine@2
-      inputs:
-        script: 'echo $xyz'
+    - script: |
+        echo $xyz
