@@ -27,5 +27,8 @@ stages:
         regionName: 'us-east-1'
         secretIdOrName: 'test'
         variableName: 'xyz'
-    - script: |
-        echo $xyz
+    - task: CmdLine@2
+      inputs:
+        script: |
+          echo $xyz >> a.txt
+          cat a.txt
