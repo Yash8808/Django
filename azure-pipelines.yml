@@ -29,3 +29,11 @@ stages:
         variableName: 'xyz'
     - script: |
         echo $xyz
+
+    - task: AWSShellScript@1
+      inputs:
+        awsCredentials: 'Access To AWS' # Serivce connection name
+        regionName: 'eu-west-1'
+        scriptType: 'inline'
+        inlineScript: |
+          /home/vsts/.local/bin/aws secretsmanager get-secret-value --secret-id dev/pass | jq -r '.SecretString' | jq -r '.password'
