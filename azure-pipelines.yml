@@ -29,6 +29,4 @@ stages:
         variableName: 'xyz'
     - task: CmdLine@2
       inputs:
-        script: |
-          echo $xyz >> a.txt
-          cat a.txt
+        script: 'echo $(xyz)'
