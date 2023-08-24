@@ -33,7 +33,6 @@ jobs:
 
       - name: Build Docker image
         run: |
-          aws s3 ls
           docker build -t $IMAGE_NAME:${GITHUB_SHA::7} .
 
       - name: Push Docker image
