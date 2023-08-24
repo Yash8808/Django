@@ -1,0 +1,29 @@
+name: Webapp CI
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  IMAGE_NAME: webapp
+    
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t $IMAGE_NAME:${GITHUB_SHA::7} .
+          docker tag $IMAGE_NAME:${GITHUB_SHA::7} $DOCKER_USERNAME/$IMAGE_NAME:${GITHUB_SHA::7}
+          docker push $DOCKER_USERNAME/$IMAGE_NAME:${GITHUB_SHA::7}
