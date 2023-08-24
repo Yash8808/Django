@@ -22,8 +22,11 @@ jobs:
       - name: Log in to Docker Hub
         run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
-      - name: Build and push Docker image
+      - name: Build Docker image
         run: |
           docker build -t $IMAGE_NAME:${GITHUB_SHA::7} .
+
+      - name: Push Docker image
+        run: |
           docker tag $IMAGE_NAME:${GITHUB_SHA::7} $DOCKER_USERNAME/$IMAGE_NAME:${GITHUB_SHA::7}
           docker push $DOCKER_USERNAME/$IMAGE_NAME:${GITHUB_SHA::7}
