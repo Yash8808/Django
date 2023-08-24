@@ -15,18 +15,18 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read 
+    #permissions:
+    #  id-token: write
+    #  contents: read 
     steps:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Configure AWS Credentials Action For GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-region: eu-west-2
-          role-to-assume: arn:aws:iam::484478223226:role/github-actions
+      #- name: Configure AWS Credentials Action For GitHub Actions
+      #  uses: aws-actions/configure-aws-credentials@v2
+      #  with:
+      #    aws-region: eu-west-2
+      #    role-to-assume: arn:aws:iam::484478223226:role/github-actions
 
       - name: Log in to Docker Hub
         run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
