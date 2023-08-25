@@ -42,7 +42,8 @@ jobs:
       
       - name: Modify Image Tag Inside Helm
         run: |
-          sed -i "s/tag: .*/tag: ${GITHUB_SHA::7}/" ./helm/values.yaml
+          TAG_VALUE=$(printf "%.0f" ${GITHUB_SHA::7})
+          sed -i "s/tag: .*/tag: $TAG_VALUE/" ./helm/values.yaml
 
       - name: Install Helm Chart
         uses: bitovi/github-actions-deploy-eks-helm@v1.2.4
