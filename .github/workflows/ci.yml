@@ -40,9 +40,9 @@ jobs:
           docker tag $IMAGE_NAME:${GITHUB_SHA::7} $DOCKER_USERNAME/$IMAGE_NAME:${GITHUB_SHA::7}
           docker push $DOCKER_USERNAME/$IMAGE_NAME:${GITHUB_SHA::7}
       
-      - name: Modify image tag inside Helm
+      - name: Modify Image Tag Inside Helm
         run: |
-          sed -i "s/tag: .*/tag: ${GITHUB_SHA::7}/" ./helm/values.yml
+          sed -i "s/tag: .*/tag: ${GITHUB_SHA::7}/" ./helm/values.yaml
 
       - name: Install Helm Chart
         uses: bitovi/github-actions-deploy-eks-helm@v1.2.4
