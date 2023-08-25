@@ -40,11 +40,15 @@ jobs:
           docker tag $IMAGE_NAME:${GITHUB_SHA::7} $DOCKER_USERNAME/$IMAGE_NAME:${GITHUB_SHA::7}
           docker push $DOCKER_USERNAME/$IMAGE_NAME:${GITHUB_SHA::7}
 
-      - name: Connect to EKS
-        run: aws eks update-kubeconfig --region eu-west-2 --name assesment-eks-cluster
+      #- name: Connect to EKS
+        #run: aws eks update-kubeconfig --region eu-west-2 --name assesment-eks-cluster
 
-      - name: Helm Install
-        uses: wahyd4/kubectl-helm-action@master
+      - name: Install Helm Chart
+        uses: bitovi/github-actions-deploy-eks-helm@v1.2.4
         with:
-          args: |
-              helm upgrade assesment ./helm --set image.tag=${GITHUB_SHA::7} --install
+          aws-region: eu-west-2
+          cluster-name: assesment-eks-cluster
+          config-files: ./helm/values.yaml
+          chart-path: ./helm/
+          values: image.tag=${GITHUB_SHA::7}
+          name: assesment
