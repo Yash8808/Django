@@ -42,10 +42,12 @@ jobs:
 
       - name: Install Helm Chart
         uses: bitovi/github-actions-deploy-eks-helm@v1.2.4
+        env:
+          IMAGE_TAG: ${GITHUB_SHA::7}
         with:
           aws-region: eu-west-2
           cluster-name: assesment-eks-cluster
           config-files: ./helm/values.yaml
           chart-path: ./helm/
-          values: image.tag=${GITHUB_SHA::7}
+          values: image.tag=${{ env.IMAGE_TAG }}
           name: assesment
