@@ -42,7 +42,7 @@ jobs:
       
       - name: Modify Image Tag Inside Helm
         run: |
-          TAG_VALUE=$(printf "%.0f" ${GITHUB_SHA::7})
+          TAG_VALUE=${GITHUB_SHA::7}
           sed -i "s/tag: .*/tag: $TAG_VALUE/" ./helm/values.yaml
 
       - name: Install Helm Chart
