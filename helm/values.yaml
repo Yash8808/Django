@@ -8,7 +8,7 @@ image:
   repository: yash8808/webapp
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: dc2507b
 
 #arguments: ['--log-driver', 'awslogs', '--log-opt awslogs-region', 'us-east-1', '--log-opt awslogs-group', 'myLogGroup', '--log-opt awslogs-create-group','true']
 
@@ -45,8 +45,9 @@ securityContext:
   # runAsUser: 1000
 
 service:
-  type: NodePort
-  port: 8000
+  type: LoadBalancer
+  port: 80
+  targetPort: 8000
 
 ingress:
   enabled: false
