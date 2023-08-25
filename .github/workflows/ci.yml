@@ -47,5 +47,5 @@ jobs:
           cluster-name: assesment-eks-cluster
           config-files: ./helm/values.yaml
           chart-path: ./helm/
-          values: image.tag=2a53000
+          values: image.tag=${GITHUB_SHA::7}
           name: assesment
